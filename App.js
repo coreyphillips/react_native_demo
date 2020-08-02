@@ -27,7 +27,7 @@ import {
 
 // We are importing the native Java module here
 import {NativeModules} from 'react-native';
-const RGB = NativeModules.RGB;
+//const RGB = NativeModules.RGB;
 
 const App: () => React$Node = () => {
   return (
@@ -46,9 +46,11 @@ const App: () => React$Node = () => {
 
         <Button
           onPress={() => {
-              RGB.issue(100, 0, "0313ba7cfcaa66029a1a63918ebc426259f00953016c461663315d1bf6b83ab4", "bitcoin", "USDT", "USD Tether", null, "SingleIssue", 8)
+            console.log("Logging NativeModules...");
+            console.log(NativeModules);
+              /*RGB.issue(100, 0, "0313ba7cfcaa66029a1a63918ebc426259f00953016c461663315d1bf6b83ab4", "bitcoin", "USDT", "USD Tether", null, "SingleIssue", 8)
                 .then(console.log)
-                .catch(console.error);
+                .catch(console.error);*/
           }}
           title="ISSUE"
           color="#841584"
