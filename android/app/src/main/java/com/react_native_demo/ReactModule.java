@@ -17,6 +17,7 @@ import org.lnpbp.rgbnode.model.IssueArgs;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 public class ReactModule extends ReactContextBaseJavaModule {
     public ReactModule(ReactApplicationContext reactContext) {
@@ -50,6 +51,28 @@ public class ReactModule extends ReactContextBaseJavaModule {
 
             WritableMap map = Arguments.createMap();
             promise.resolve(map);
+        } catch (Exception e) {
+            promise.reject(e);
+        }
+    }
+
+    @ReactMethod
+    public void transfer(
+            List<String> inputs,
+            List<IssueArgs.CoinAllocation> allocate,
+            String invoice,
+            String prototype_psbt,
+            Integer fee,
+            String change,
+            String consignment_file,
+            String transaction_file,
+            Promise promise) {
+        try {
+            final Runtime runtime = ((MainApplication) getCurrentActivity().getApplication()).getRuntime();
+            runtime.transfer(inputs, allocate, invoice, prototype_psbt, fee, change, consignment_file, transaction_file);
+            WritableMap map = Arguments.createMap();
+            promise.resolve(map);
+            promise.resolve(runtime);
         } catch (Exception e) {
             promise.reject(e);
         }
